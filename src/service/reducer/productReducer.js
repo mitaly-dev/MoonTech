@@ -39,8 +39,9 @@ export const productReducer=( state = initialProduct,action)=>{
             ...state,cart : [...newCart2,selectedProduct]
         }
        }
+       const newCart2 = state.cart.filter(product=>product._id!==action.payload._id)
        return{
-        ...state,cart : state.cart.filter(product=>product._id!==action.payload._id)
+        ...state,cart : [...newCart2,{...selectedProduct,quantity:0}]
        }
     case removeFromCart : 
         return {
