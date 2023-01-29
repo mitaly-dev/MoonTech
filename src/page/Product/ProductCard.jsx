@@ -1,6 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../service/actionType/actionType";
+import { AiOutlineHeart } from 'react-icons/ai';
+import { FaTrash } from 'react-icons/fa';
+import { addToCartAction, addToWishlistAction, removeFromCartAction } from "../../service/actions/action";
+import { useLocation } from "react-router-dom";
+
+
 const ProductCard = ({ product }) => {
-//   const { dispatch } = useProducts();
+    const location = useLocation()
+    const dispatch = useDispatch()
 
   return (
     <div
@@ -20,18 +29,36 @@ const ProductCard = ({ product }) => {
         </ul>
       </div>
       <div className='flex gap-2 mt-5'>
-        <button
-          className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'
+        {
+            location.pathname==='/cart' ? 
+            <button
+            onClick={()=>dispatch(removeFromCartAction(product))}
+            className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold flex items-center justify-center gap-2'
 
-        >
-          Add to cart
-        </button>
-        <button
-          title='Add to wishlist'
-          className='bg-indigo-500  py-1 px-2 rounded-full'
-        >
-          wishtlist
-        </button>
+            >
+            <span>Remove cart</span>
+            <FaTrash></FaTrash>
+            </button>
+            
+            : 
+            <>
+            <button
+            onClick={()=>dispatch(addToCartAction(product))}
+            className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold'
+
+            >
+            Add to cart
+            </button>
+            <button
+            onClick={()=>dispatch(addToWishlistAction(product))}
+            title='Add to wishlist'
+            className='bg-indigo-500  py-1 px-2 rounded-full'
+            >
+            <AiOutlineHeart></AiOutlineHeart>
+            </button>
+            </>
+        }
+        
       </div>
     </div>
   );
