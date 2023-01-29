@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <div className='grid grid-cols-4 gap-3 px-28 py-10'>
            {
-            products.map((product,index)=><ProductCard key={index} product={product}></ProductCard>)
+            products.sort((a,b)=>a._id-b._id).map((product,index)=><ProductCard key={index} product={product}></ProductCard>)
            }
 
         </div>

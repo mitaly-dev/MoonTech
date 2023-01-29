@@ -1,3 +1,5 @@
 export const addToCart = 'AddToCart'
 export const addToWishlist = 'addToWishlist'
 export const removeFromCart = 'removeFromCart'
+export const cartDecrement = 'cartDecrement'
+export const cartIncrement = 'cartIncrement'

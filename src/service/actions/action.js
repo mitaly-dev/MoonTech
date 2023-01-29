@@ -20,3 +20,4 @@ export const removeFromCartAction=(product)=>{
         payload : product
     }
 }
+

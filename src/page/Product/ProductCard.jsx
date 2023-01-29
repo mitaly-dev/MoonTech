@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../service/actionType/actionType";
+import { addToCart, cartDecrement, cartIncrement } from "../../service/actionType/actionType";
 import { AiOutlineHeart } from 'react-icons/ai';
-import { FaTrash } from 'react-icons/fa';
+import { FaMinus, FaPlug, FaPlus, FaTrash } from 'react-icons/fa';
 import { addToCartAction, addToWishlistAction, removeFromCartAction } from "../../service/actions/action";
 import { useLocation } from "react-router-dom";
 
@@ -28,6 +28,19 @@ const ProductCard = ({ product }) => {
           })}
         </ul>
       </div>
+      <>
+        {
+          location.pathname==='/cart' && 
+          <div className="flex items-center gap-3">
+            <span className="font-semibold">Quantity</span> : 
+            <div className="flex items-center gap-1 my-2">
+            <button onClick={()=>dispatch({type:cartDecrement,payload:product})}><FaMinus></FaMinus></button>
+            <span className="border px-3 py-1 rounded-md font-semibold">{product.quantity}</span>
+            <button onClick={()=>dispatch({type:cartIncrement,payload:product})}><FaPlus></FaPlus></button>
+          </div>
+          </div>
+        }
+      </>
       <div className='flex gap-2 mt-5'>
         {
             location.pathname==='/cart' ? 
